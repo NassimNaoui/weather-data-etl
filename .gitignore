@@ -1,0 +1,28 @@
+# --- Secrets & Config ---
+.env
+*.env
+.vscode/
+.idea/
+
+# --- Python / Poetry ---
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+.pytest_cache/
+
+.venv-source-file/
+
+# --- dbt ---
+dbt_project/target/
+dbt_project/dbt_packages/
+dbt_project/logs/
+
+# --- Airbyte & Cache ---
+*.duckdb
+*.duckdb.wal
+.cache/
+
+# --- OS / IDE ---
+.DS_Store
+*.swp
