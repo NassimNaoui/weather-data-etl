@@ -1,0 +1,14 @@
+version: 2
+
+sources:
+  - name: airbyte_raw
+    schema: airbyte_raw # Le schéma dans Postgres
+    tables:
+      - name: info_climat
+        description: "Données provenant du fichier JSON de info_climat"
+        
+      - name: weather_underground_be
+        description: "Données provenant du fichier XLSX de Weather Underground (Belgique)"
+
+      - name: weather_underground_fr
+        description: "Données provenant du fichier XLSX de Weather Underground (France)"

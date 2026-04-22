@@ -1,0 +1,12 @@
+dbt_transformation: 
+  outputs:
+    dev:
+      type: postgres
+      host: postgres # Nom du service dans le docker-compose
+      user: "{{ env_var('POSTGRES_USER') }}"
+      password: "{{ env_var('POSTGRES_PASSWORD') }}"
+      port: 5432
+      dbname: "{{ env_var('POSTGRES_DB_NAME') }}"
+      schema: public
+      threads: 4
+  target: dev

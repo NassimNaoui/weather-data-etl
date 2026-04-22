@@ -20,15 +20,16 @@ services:
   # dbt Core
   # -----------------------
   dbt:
-    image: ghcr.io/dbt-labs/dbt-postgres:1.7.0
-    platform: linux/amd64
+    build: .
     container_name: dbt
     depends_on:
       - postgres
-    working_dir: /usr/app
+    env_file:
+      - .env
+    environment:
+      - DBT_PROFILES_DIR=/usr/app/dbt_transformation
     volumes:
-      - ./dbt_project:/usr/app
-    entrypoint: tail -f /dev/null  # garde le conteneur actif
+      - .:/usr/app
 
 volumes:
   postgres-data:
