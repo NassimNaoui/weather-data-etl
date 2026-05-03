@@ -1,0 +1,201 @@
+version: 2
+
+models:
+
+- name: fact_weather
+  description: "Table de faits météo. Grain : 1 ligne = 1 station + 1 date + 1 heure (observation)"
+
+  columns:
+
+  - name: station_id
+    description: "Clé de jointure vers dim_stations"
+    tests:
+      - not_null
+      - relationships:
+          arguments:
+            to: ref('dim_stations')
+            field: station_id
+
+  - name: date_id
+    description: "Clé de jointure vers dim_time (date de mesure)"
+    tests:
+      - not_null
+      - relationships:
+          arguments:   # ✅ corrigé
+            to: ref('dim_time')
+            field: date_id
+
+  - name: time
+    description: "Heure de la mesure"
+    tests:
+      - not_null
+
+  - name: temperature
+    description: "Température mesurée en degrés Celsius"
+
+  - name: pressure
+    description: "Pression atmosphérique en hPa"
+
+  - name: humidity
+    description: "Taux d'humidité en pourcentage (%)"
+
+  - name: dew_point
+    description: "Point de rosée en degrés Celsius"
+
+  - name: gust
+    description: "Vitesse des rafales de vent"
+
+  - name: wind_direction
+    description: "Direction du vent normalisée (clé vers dim_wind)"
+    tests:
+      - relationships:
+          arguments:   # ✅ corrigé
+            to: ref('dim_wind')
+            field: wind_direction
+
+  - name: speed
+    description: "Vitesse du vent"
+
+  - name: precip_rate
+    description: "Taux de précipitations instantané"
+
+  - name: precip_accum
+    description: "Précipitations cumulées"
+
+  - name: uv
+    description: "Indice UV"
+
+  - name: solar
+    description: "Rayonnement solaire en W/m²"
+
+  - name: visibility
+    description: "Visibilité horizontale"
+
+  - name: mean_wind
+    description: "Vitesse moyenne du vent en km/h"
+
+  - name: rain_over_3h
+    description: "Précipitations cumulées sur 3 heures"
+
+  - name: rain_over_1h
+    description: "Précipitations cumulées sur 1 heure"
+
+  - name: haze
+    description: "Présence de brume ou particules dans l'air"
+
+  - name: present_weather
+    description: "Conditions météorologiques observées (ex: clear, rain, fog, etc.)"
+
+
+- name: dim_time
+  description: "Dimension temps journalière couvrant les années 2024 à 2026"
+
+  columns:
+
+  - name: date_id
+    description: "Date unique (clé primaire)"
+    tests:
+      - unique
+      - not_null
+
+  - name: date_key
+    description: "Clé technique de la date (format YYYYMMDD)"
+
+  - name: year
+    description: "Année"
+
+  - name: month
+    description: "Mois (numérique)"
+
+  - name: month_name
+    description: "Nom du mois"
+
+  - name: day
+    description: "Jour du mois"
+
+  - name: day_name
+    description: "Nom du jour"
+
+  - name: day_of_week
+    description: "Numéro du jour de la semaine (1-7)"
+
+  - name: iso_day_of_week
+    description: "Numéro ISO du jour de la semaine (1 = lundi)"
+
+  - name: week_number
+    description: "Numéro de la semaine"
+
+  - name: iso_year
+    description: "Année ISO"
+
+  - name: year_month
+    description: "Année et mois (format YYYY-MM)"
+
+  - name: is_weekend
+    description: "Indique si le jour est un week-end"
+    tests:
+      - accepted_values:
+          values: [true, false]
+
+  - name: season
+    description: "Saison (hiver, printemps, été, automne)"
+
+
+- name: dim_stations
+  description: "Dimension des stations météo (localisation, caractéristiques techniques)"
+
+  columns:
+
+  - name: station_id
+    description: "Identifiant unique de la station"
+    tests:
+      - unique
+      - not_null
+
+  - name: station_name
+    description: "Nom de la station"
+
+  - name: latitude
+    description: "Coordonnée géographique nord/sud (axe Y)"
+
+  - name: longitude
+    description: "Coordonnée géographique est/ouest (axe X)"
+
+  - name: elevation
+    description: "Altitude de la station en mètres"
+
+  - name: country
+    description: "Pays"
+
+  - name: city
+    description: "Ville"
+
+  - name: station_type
+    description: "Type de station (ex: synop, personnelle, etc.)"
+
+  - name: hardware
+    description: "Matériel utilisé pour les mesures"
+
+  - name: software
+    description: "Logiciel utilisé pour les relevés"
+
+
+- name: dim_wind
+  description: "Dimension de normalisation des directions de vent (rose des vents complète)"
+
+  columns:
+
+  - name: wind_direction
+    description: "Code de direction du vent (ex: N, NE, SW)"
+    tests:
+      - unique
+      - not_null
+      - accepted_values:
+          values:
+            ['N','NNE','NE','ENE',
+             'E','ESE','SE','SSE',
+             'S','SSW','SW','WSW',
+             'W','WNW','NW','NNW']
+
+  - name: wind_description
+    description: "Description textuelle de la direction du vent (ex: North, South-West)"

@@ -1,0 +1,33 @@
+version: 2
+
+sources:
+  - name: airbyte_raw
+    schema: airbyte_raw
+    tables:
+      - name: info_climat
+        description: "Données provenant du fichier JSON de info_climat"
+        
+      - name: weather_underground_be
+        description: "Données provenant du fichier XLSX de Weather Underground (Belgique)"
+
+      - name: weather_underground_fr
+        description: "Données provenant du fichier XLSX de Weather Underground (France)"
+
+models:
+  - name: stg_data_info_climat
+    description: "Vue qui permet d'aplatir la table info_climat"
+
+  - name: stg_data_weather_u_be
+    description: "Vue qui nettoie et type la table weather_underground_be"
+
+  - name: stg_data_weather_u_fr
+    description: "Vue qui nettoie et type la table weather_underground_fr"
+
+  - name: stg_metadata_info_climat
+    description: "Vue qui structure les métadonnées info_climat"
+
+  - name: stg_stations_info_climat
+    description: "Vue des stations info_climat"
+
+  - name: stg_stations_weather_u
+    description: "Vue des stations weather underground"

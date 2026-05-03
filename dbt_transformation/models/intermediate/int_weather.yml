@@ -1,0 +1,14 @@
+version: 2
+
+models:
+  - name: int_data_info_climat
+    description: "Données climat enrichies avec séparation date/heure et normalisation des directions de vent"
+
+  - name: int_data_weather_u
+    description: "Données météo Weather Underground unifiées (Belgique + France) avec schéma standardisé"
+
+  - name: int_union_stations
+    description: "Table unifiée des stations météo provenant de différentes sources"
+
+  - name: int_union_weather
+    description: "Table consolidée regroupant toutes les sources météo (info_climat + weather underground)"

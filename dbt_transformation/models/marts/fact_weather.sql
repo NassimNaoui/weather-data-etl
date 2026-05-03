@@ -1,4 +1,11 @@
-{{ config(materialized='table') }}
+{{ config(materialized='table',
+           post_hook=[
+        "CREATE INDEX IF NOT EXISTS idx_fact_weather_station_id
+         ON {{ this }} (station_id)",
+
+        "CREATE INDEX IF NOT EXISTS idx_fact_weather_date
+         ON {{ this }} (date)"
+    ]) }}
 
 SELECT
     station_id,
