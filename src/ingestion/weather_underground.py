@@ -1,5 +1,6 @@
 from src.ingestion.file_connector import FileConnector
 from sqlalchemy import create_engine
+import pandas as pd
 
 
 class WeatherUndergroundWorker:
@@ -17,8 +18,22 @@ class WeatherUndergroundWorker:
         self.READER_OPTIONS = {"header": 0, "skiprows": 1}
         self.SCHEMA = "airbyte_raw"
 
-    def run_pipeline(self, destination_config):
+    def read_excel_files(self, url):
 
+        xls = pd.ExcelFile(url)
+        dfs = []
+        for sheet_name in xls.sheet_names:
+            df = pd.read_excel(xls, sheet_name=sheet_name)
+            df = df.dropna()
+            year = "20" + sheet_name[-2:]
+            month = sheet_name[2:4]
+            day = sheet_name[0:2]
+            df["date"] = year + month + day
+            dfs.append(df)
+
+        return pd.concat(dfs)
+
+    def run_pipeline(self, destination_config):
         sql_host = (
             "localhost"
             if destination_config.host == "host.docker.internal"
@@ -32,28 +47,15 @@ class WeatherUndergroundWorker:
         for url in self.urls:
             file_id = "weather_underground_" + url.split("/")[-1][-7:-5]
 
-            source = self.connector.get_connexion(
-                file_id.lower(),
-                self.FORMAT,
-                url,
-                self.PROVIDER,
-                self.READER_OPTIONS,
-            )
-
             print(f"📥 Début de l'extraction de la source {file_id}")
-            source.select_all_streams()
-            read_result = source.read()
-
-            # Extraction et Transformation
-            df = read_result.cache.get_pandas_dataframe(file_id)
-            df = df.dropna()
+            df = self.read_excel_files(url)
 
             print(f"📤 Écriture du DataFrame nettoyé vers Postgres...")
             df.to_sql(
                 name=file_id.lower(),
                 con=engine,
                 schema=self.SCHEMA,
-                if_exists="replace",
+                if_exists="append",
                 index=False,
             )
 

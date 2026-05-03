@@ -2,7 +2,7 @@
 
 
 SELECT station_id,
-       date_heure as date_and_time, 
+       date_heure::date as date, 
        TO_CHAR(date_heure, 'HH24:MI:SS') as time,
        temperature, 
        pression as pressure, 

@@ -2,6 +2,7 @@
 
 SELECT
     station_id,
+    date,
     time,
     temperature,
     pressure,
@@ -14,7 +15,6 @@ SELECT
     precip_accum,
     uv,
     solar,
-    date_and_time,
     visibility,
     mean_wind,
     rain_over_3h,

@@ -9,6 +9,7 @@ FROM (
             50.659,
             3.07,
             23,
+            'France',
             'La Madeleine',
             'other',
             'EasyWeatherPro_V5.1.6'
@@ -19,6 +20,7 @@ FROM (
             51.092,
             2.999,
             15,
+            'Belgium',
             'Ichtegem',
             'other',
             'EasyWeatherV1.6.6'
@@ -29,6 +31,7 @@ FROM (
     latitude,
     longitude,
     elevation,
+    country,
     city,
     hardware,
     software

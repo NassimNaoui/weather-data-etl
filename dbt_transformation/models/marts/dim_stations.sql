@@ -6,6 +6,7 @@ SELECT
     latitude,
     longitude,
     elevation,
+    country,
     coalesce(city, station_name) as city,
     station_type,
     hardware,

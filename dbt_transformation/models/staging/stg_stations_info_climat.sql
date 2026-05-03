@@ -8,6 +8,7 @@ WITH raw_data AS (
 SELECT 
     element->>'id' as station_id, 
     element->>'name' as station_name,
+    'France' as country,
     (element->>'latitude')::float as latitude,
     (element->>'longitude')::float as longitude,
     (element->>'elevation')::int as elevation, 

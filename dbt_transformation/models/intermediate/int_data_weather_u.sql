@@ -6,6 +6,7 @@
 WITH data_be AS (
     SELECT 
     'IICHTE19' AS station_id,
+    date,
     time,
     temperature, --ok
     dew_point, -- ok
@@ -22,6 +23,7 @@ WITH data_be AS (
 ), data_fr AS (
     SELECT 
     'ILAMAD25' AS station_id,
+    date,
     time,
     temperature,
     dew_point,
