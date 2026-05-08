@@ -16,11 +16,12 @@ class InfoClimatWorker:
             self.DATASET_NAME, self.FORMAT, self.URL, self.PROVIDER
         )
 
+        # 2. Lecture de la source et mise en cache
         print(f"📥 Extraction de la source {self.DATASET_NAME} vers le cache local...")
         source.select_all_streams()
 
+        # 3. Ecriture dans la destination
         print(f"📤 Transfert du cache vers Postgres...")
-
         destination.write(source.read(), write_strategy="replace")
 
         print(f"✅ Ingestion réalisée avec succès !")

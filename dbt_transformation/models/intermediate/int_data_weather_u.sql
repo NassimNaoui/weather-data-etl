@@ -8,13 +8,13 @@ WITH data_be AS (
     'IICHTE19' AS station_id,
     date,
     time,
-    temperature, --ok
-    dew_point, -- ok
-    humidity, --ok
-    wind as wind_direction, --ok
+    temperature,
+    dew_point, 
+    humidity,
+    wind as wind_direction,
     speed,
-    gust, -- ok
-    pressure, --ok
+    gust, 
+    pressure,
     precip_rate,
     precip_accum,
     uv,

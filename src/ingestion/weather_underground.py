@@ -47,9 +47,11 @@ class WeatherUndergroundWorker:
         for url in self.urls:
             file_id = "weather_underground_" + url.split("/")[-1][-7:-5]
 
+            # 1. Lecture des fichiers
             print(f"📥 Début de l'extraction de la source {file_id}")
             df = self.read_excel_files(url)
 
+            # 2. Ecriture dans la destination
             print(f"📤 Écriture du DataFrame nettoyé vers Postgres...")
             df.to_sql(
                 name=file_id.lower(),
