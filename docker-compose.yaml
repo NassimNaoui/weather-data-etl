@@ -30,6 +30,8 @@ services:
       - DBT_PROFILES_DIR=/usr/app/dbt_transformation
     volumes:
       - .:/usr/app
+    ports:
+      - "8080:8080"
 
 volumes:
   postgres-data:
