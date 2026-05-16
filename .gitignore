@@ -1,6 +1,8 @@
 # --- Secrets & Config ---
-.env
-*.env
+.env*
+!.env.exemple
+!.env.prod.exemple
+
 .vscode/
 .idea/
 

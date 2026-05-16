@@ -1,0 +1,25 @@
+2026-05-11 16:19:01 - INFO - INFO main i.a.i.d.p.PostgresDestination$Companion(main):229 starting destination: class io.airbyte.integrations.destination.postgres.PostgresDestination
+2026-05-11 16:19:01 - INFO - INFO main i.a.c.i.b.IntegrationCliParser$Companion(parseOptions):144 integration args: {check=null, config=/airbyte/tmp/tmpcybmjlo8.json}
+2026-05-11 16:19:01 - INFO - INFO main i.a.c.i.b.IntegrationRunner(runInternal):130 Running integration: io.airbyte.cdk.integrations.base.ssh.SshWrappedDestination
+2026-05-11 16:19:01 - INFO - INFO main i.a.c.i.b.IntegrationRunner(runInternal):131 Command: CHECK
+2026-05-11 16:19:01 - INFO - INFO main i.a.c.i.b.IntegrationRunner(runInternal):132 Integration config: IntegrationConfig{command=CHECK, configPath='/airbyte/tmp/tmpcybmjlo8.json', catalogPath='null', statePath='null'}
+2026-05-11 16:19:01 - INFO - ERROR main i.a.c.i.u.ConnectorExceptionHandler(handleException):68 caught exception! java.lang.RuntimeException: java.nio.file.NoSuchFileException: /airbyte/tmp/tmpcybmjlo8.json
+	at io.airbyte.commons.io.IOs.readFile(IOs.kt:70) ~[airbyte-cdk-dependencies-0.48.9.jar:?]
+	at io.airbyte.cdk.integrations.base.IntegrationRunner$Companion.parseConfig(IntegrationRunner.kt:548) ~[airbyte-cdk-core-0.48.9.jar:?]
+	at io.airbyte.cdk.integrations.base.IntegrationRunner.runInternal(IntegrationRunner.kt:143) [airbyte-cdk-core-0.48.9.jar:?]
+	at io.airbyte.cdk.integrations.base.IntegrationRunner.run(IntegrationRunner.kt:119) [airbyte-cdk-core-0.48.9.jar:?]
+	at io.airbyte.cdk.integrations.base.IntegrationRunner.run$default(IntegrationRunner.kt:113) [airbyte-cdk-core-0.48.9.jar:?]
+	at io.airbyte.integrations.destination.postgres.PostgresDestination$Companion.main(PostgresDestination.kt:230) [io.airbyte.airbyte-integrations.connectors-destination-postgres.jar:?]
+	at io.airbyte.integrations.destination.postgres.PostgresDestination.main(PostgresDestination.kt) [io.airbyte.airbyte-integrations.connectors-destination-postgres.jar:?]
+Caused by: java.nio.file.NoSuchFileException: /airbyte/tmp/tmpcybmjlo8.json
+	at java.base/sun.nio.fs.UnixException.translateToIOException(UnixException.java:92) ~[?:?]
+	at java.base/sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:106) ~[?:?]
+	at java.base/sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:111) ~[?:?]
+	at java.base/sun.nio.fs.UnixFileSystemProvider.newByteChannel(UnixFileSystemProvider.java:261) ~[?:?]
+	at java.base/java.nio.file.Files.newByteChannel(Files.java:380) ~[?:?]
+	at java.base/java.nio.file.Files.newByteChannel(Files.java:432) ~[?:?]
+	at java.base/java.nio.file.Files.readAllBytes(Files.java:3281) ~[?:?]
+	at java.base/java.nio.file.Files.readString(Files.java:3359) ~[?:?]
+	at io.airbyte.commons.io.IOs.readFile(IOs.kt:68) ~[airbyte-cdk-dependencies-0.48.9.jar:?]
+	... 6 more
+

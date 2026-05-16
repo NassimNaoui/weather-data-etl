@@ -8,6 +8,7 @@ RUN apt-get update && apt-get install -y \
     libpq-dev \
     gcc \
     git \
+    docker.io \
     && rm -rf /var/lib/apt/lists/*
 
 ENV POETRY_HOME="/opt/poetry"

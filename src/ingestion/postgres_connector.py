@@ -1,5 +1,4 @@
 import airbyte as ab
-import os
 
 
 class PostgresConnector:
@@ -12,9 +11,7 @@ class PostgresConnector:
         self.user = user
         self.password = password
 
-    def get_connexion(
-        self,
-    ):
+    def get_connexion(self):
         return ab.get_destination(
             "destination-postgres",
             config={
@@ -24,6 +21,6 @@ class PostgresConnector:
                 "username": self.user,
                 "password": self.password,
                 "schema": "airbyte_raw",
-                "ssl_mode": {"mode": "disable"},
+                "ssl_mode": {"mode": "require"},  # DEV MODE : {"mode": "disable"},
             },
         )
