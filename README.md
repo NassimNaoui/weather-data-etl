@@ -33,7 +33,7 @@ The pipeline ingests data from:
 
 ### 1. Clone the repository
 ```bash
-git clone git@github.com:NassimNaoui/weather-data-etl.git
+git clone https://github.com/NassimNaoui/weather-data-etl.git
 cd weather-data-etl
 ```
 
